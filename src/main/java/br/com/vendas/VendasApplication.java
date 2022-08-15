@@ -17,6 +17,7 @@ public class VendasApplication {
             for (int i = 1; i <= 10; i++) {
                 Cliente cliente = new Cliente();
                 cliente.setNome("Cliente " + i);
+                cliente.setCpf("000000000" + i);
                 clienteRepository.save(cliente);
             }
         };
