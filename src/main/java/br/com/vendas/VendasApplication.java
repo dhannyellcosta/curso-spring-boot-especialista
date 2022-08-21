@@ -11,17 +11,17 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class VendasApplication {
 
-    @Bean
-    public CommandLineRunner commandLineRunner(@Autowired ClienteRepository clienteRepository){
-        return args -> {
-            for (int i = 1; i <= 10; i++) {
-                Cliente cliente = new Cliente();
-                cliente.setNome("Cliente " + i);
-                cliente.setCpf("000000000" + i);
-                clienteRepository.save(cliente);
-            }
-        };
-    }
+//    @Bean
+//    public CommandLineRunner commandLineRunner(@Autowired ClienteRepository clienteRepository){
+//        return args -> {
+//            for (int i = 1; i <= 10; i++) {
+//                Cliente cliente = new Cliente();
+//                cliente.setNome("Cliente " + i);
+//                cliente.setCpf("000000000" + i);
+//                clienteRepository.save(cliente);
+//            }
+//        };
+//    }
     public static void main(String[] args) {
         SpringApplication.run(VendasApplication.class, args);
     }

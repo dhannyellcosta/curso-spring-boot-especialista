@@ -43,8 +43,6 @@ public class ClienteController {
 			return cliente;
 
 		}).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado"));
-		;
-
 	}
 
 	@PutMapping("{id}")
@@ -59,9 +57,7 @@ public class ClienteController {
 
 	@GetMapping()
 	public List<Cliente> find(Cliente filtro) {
-
 		ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreCase().withStringMatcher(StringMatcher.CONTAINING);
-
 		Example example = Example.of(filtro, matcher);
 		return clienteRepository.findAll(example);
 
