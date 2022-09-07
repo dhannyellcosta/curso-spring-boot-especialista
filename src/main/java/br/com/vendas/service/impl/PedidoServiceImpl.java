@@ -13,6 +13,8 @@ import br.com.vendas.domain.entity.Cliente;
 import br.com.vendas.domain.entity.ItemPedido;
 import br.com.vendas.domain.entity.Pedido;
 import br.com.vendas.domain.entity.Produto;
+import br.com.vendas.domain.enums.StatusPedido;
+import br.com.vendas.exception.PedidoNaoEncontradoException;
 import br.com.vendas.exception.RegraNegocioException;
 import br.com.vendas.repository.ClienteRepository;
 import br.com.vendas.repository.ItemPedidoRepository;
@@ -44,6 +46,7 @@ public class PedidoServiceImpl implements PedidoService {
 		pedido.setTotal(dto.getTotal());
 		pedido.setDataPedido(LocalDate.now());
 		pedido.setCliente(cliente);
+		pedido.setStatus(StatusPedido.REALIZADO);
 		
 		List<ItemPedido> itensPedidos = converterItens(pedido, dto.getItens());
 		pedidoRepository.save(pedido);
@@ -74,5 +77,17 @@ public class PedidoServiceImpl implements PedidoService {
 	public Optional<Pedido> obterPedidoCompleto(Integer id) {
 		
 		return pedidoRepository.findByIdFetchItens(id);
+	}
+	
+	@Override
+	@Transactional
+	public void atualizaStatus(Integer id, StatusPedido statusPedido) {
+		
+		pedidoRepository.findById(id)
+						.map(pedido -> {
+							pedido.setStatus(statusPedido);
+							return pedidoRepository.save(pedido);
+						}).orElseThrow(() -> new PedidoNaoEncontradoException());
+		
 	}
 }
