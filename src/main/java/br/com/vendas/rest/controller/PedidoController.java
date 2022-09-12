@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.CollectionUtils;
@@ -36,7 +38,7 @@ public class PedidoController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Integer save(@RequestBody PedidoDTO dto) {
+	public Integer save(@RequestBody @Valid PedidoDTO dto) {
 		Pedido pedido = pedidoService.salvar(dto);
 		return pedido.getId();
 	}
@@ -50,7 +52,7 @@ public class PedidoController {
 	
 	@PatchMapping("{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void updateStatus(@PathVariable Integer id, @RequestBody AtualizacaoStatusPedidoDTO dto) {
+	public void updateStatus(@PathVariable Integer id, @RequestBody @Valid AtualizacaoStatusPedidoDTO dto) {
 		String novoStatus = dto.getNovoStatus();
 		pedidoService.atualizaStatus(id, StatusPedido.valueOf(novoStatus));
 	}
