@@ -9,6 +9,6 @@ import lombok.Setter;
 @Setter
 public class AtualizacaoStatusPedidoDTO {
 
-	@NotEmpty(message = "Informe o status do pedido")
+	@NotEmpty(message = "{campo.status.obrigatorio}")
 	private String novoStatus;
 }

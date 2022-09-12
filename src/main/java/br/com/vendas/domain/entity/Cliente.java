@@ -33,11 +33,11 @@ public class Cliente {
 	private Integer id;
 
 	@Column(name = "nome", length = 100)
-	@NotEmpty(message = "Informe o nome do cliente.")
+	@NotEmpty(message = "{campo.nome.obrigatorio}")
 	private String nome;
 
 	@Column(name = "cpf", length = 11)
-	@NotEmpty(message = "Informe o cpf do cliente.")
+	@NotEmpty(message = "{campo.cpf.obrigatorio}")
 	@CPF
 	private String cpf;
 
